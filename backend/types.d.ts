@@ -1,14 +1,18 @@
 import {WebSocket} from 'ws';
 import {Model} from 'mongoose';
 
+interface ActiveUser {
+  ws: WebSocket;
+  username: string;
+}
+
 export interface ActiveConnections {
-    [id: string]: WebSocket;
+    [id: string]: ActiveUser;
 }
 
 export interface IncomingMessage {
     type: string;
     payload: string;
-    username?: string;
 }
 
 interface UserMethods {
@@ -24,5 +28,10 @@ export interface UserFields {
 }
 
 type UserModel = Model<UserFields, unknown, UserMethods>;
+
+interface ChatMutation {
+    username: string;
+    message: string;
+}
 
 
