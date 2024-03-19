@@ -13,7 +13,7 @@ const app = express();
 
 expressWs(app);
 
-chatRouter.ws('/chat', (ws: WebSocket) => {
+chatRouter.ws('/messages', (ws: WebSocket) => {
   const id = require('crypto').randomUUID();
   console.log('Client connected! ID=', id);
 

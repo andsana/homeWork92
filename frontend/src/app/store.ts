@@ -10,11 +10,10 @@ import {
   persistStore,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
-import { usersReducer } from '../features/users/usersSlice.ts';
+import {usersReducer} from '../../features/users/usersSlice.ts';
 
 const usersPersistConfig = {
-  key: 'music:users',
+  key: 'chat:users',
   storage: storage,
   whitelist: ['user'],
 };
@@ -37,3 +36,4 @@ export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
