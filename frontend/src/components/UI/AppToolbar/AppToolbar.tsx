@@ -3,7 +3,7 @@ import {AppBar, Grid, styled, Toolbar, Typography} from '@mui/material';
 import {useAppSelector} from '../../../app/hooks.ts';
 import UserMenu from './UserMenu.tsx';
 import AnonymousMenu from './AnonymousMenu.tsx';
-import { selectUser } from '../../../../features/users/usersSlice.ts';
+import { selectUser } from '../../../features/users/usersSlice.ts';
 
 const Link = styled(NavLink)({
   color: 'inherit',

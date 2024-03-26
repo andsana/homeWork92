@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { login, register } from './usersThunk.ts';
-import {GlobalError, User, ValidationError} from "../../src/types";
-import { RootState } from '../../src/app/store.ts';
+import {GlobalError, User, ValidationError} from "../../types";
+import { RootState } from '../../app/store.ts';
 
 interface UsersState {
   user: User | null;

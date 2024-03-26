@@ -10,7 +10,7 @@ import {
   persistStore,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {usersReducer} from '../../features/users/usersSlice.ts';
+import {usersReducer} from '../features/users/usersSlice.ts';
 
 const usersPersistConfig = {
   key: 'chat:users',

@@ -1,7 +1,6 @@
 import express from 'express';
 import User from '../models/User';
 import mongoose from 'mongoose';
-import auth, { RequestWithUser } from '../middleware/auth';
 
 const userRouter = express.Router();
 
@@ -10,9 +9,11 @@ userRouter.post('/', async (req, res, next) => {
     const user = new User({
       username: req.body.username,
       password: req.body.password,
+      displayName: req.body.displayName,
     });
 
     user.generateToken();
+
     await user.save();
     return res.send({ message: 'ok!', user });
   } catch (error) {
@@ -47,23 +48,23 @@ userRouter.post('/sessions', async (req, res, next) => {
   }
 });
 
-userRouter.delete(
-  '/sessions',
-  auth,
-  async (req: RequestWithUser, res, next) => {
+userRouter.delete('/sessions', async (req, res, next) => {
     try {
-      if (req.user) {
-        req.user.generateToken();
-        await req.user.save();
+      const token = req.get('Authorization');
+      const success = { message: 'Succesc' };
 
-        return res.send({ message: 'Successfully logged out' });
-      }
+      if (!token) return res.send(success);
 
-      return res
-        .status(401)
-        .send({ error: 'User not found or already logged out' });
+      const user = await User.findOne({ token });
+
+      if (!user) return res.send(success);
+
+      user.generateToken();
+      user.save();
+
+      return res.send(success);
     } catch (e) {
-      next(e);
+      return next(e);
     }
   },
 );

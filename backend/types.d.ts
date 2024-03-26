@@ -1,13 +1,8 @@
 import {WebSocket} from 'ws';
 import {Model} from 'mongoose';
 
-interface ActiveUser {
-  ws: WebSocket;
-  username: string;
-}
-
 export interface ActiveConnections {
-    [id: string]: ActiveUser;
+    [id: string]: WebSocket;
 }
 
 export interface IncomingMessage {
@@ -20,11 +15,19 @@ interface UserMethods {
   generateToken(): void;
 }
 
+export interface OnlineUser {
+  _id: string;
+  displayName: string;
+}
+
 export interface UserFields {
+  _id: string;
   username: string;
   password: string;
+  displayName: string;
   token: string;
   role: string;
+  active: boolean;
 }
 
 type UserModel = Model<UserFields, unknown, UserMethods>;

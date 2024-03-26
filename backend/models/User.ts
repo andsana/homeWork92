@@ -27,6 +27,10 @@ const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
       message: 'This user is already registered!',
     },
   },
+  displayName: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
@@ -63,7 +67,7 @@ UserSchema.pre('save', async function (next) {
 });
 
 UserSchema.set('toJSON', {
-  transform: (doc, ret) => {
+  transform: (_doc, ret) => {
     delete ret.password;
     return ret;
   },
